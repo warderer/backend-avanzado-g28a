@@ -1,0 +1,38 @@
+/* -- Buscar Documentos en MongoDB -- */
+
+// use: indica a MongoDB que base de datos vamos a utilizar. Si la base de datos no existe, la crea automáticamente.
+use('sample_mflix')
+
+/* -- Buscar un solo documento -- */
+// findOne() se utiliza para buscar un solo documento en una colección y devuelve el primer documento que cumple con los criterios de búsqueda.
+// La estructura de findOne() es la siguiente:
+// db.<nombre_colección>.findOne({<campo>: <valor>}, <proyección>, <opciones>)
+
+// Encontrar la pelicula con el título "The Godfather"
+// db.movies.findOne({title: "The Godfather"})
+
+// Encontrar una pelicula por ID ("The Son of the Sheik")
+// db.movies.findOne({_id: ObjectId('573a1391f29313caabcd8521')})
+
+/* -- Buscar multiples documentos -- */
+// find() se utiliza para buscar múltiples documentos en una colección y devuelve un cursor que puede ser recorrido para obtener los documentos. Un cursor es un puntero a los resultados de una consulta.
+// La estructura de find() es la siguiente:
+// db.<nombre_colección>.find({<campo>: <valor>}, <proyección>, <opciones>)
+
+// Traer todas las peliculas de la colección
+// db.movies.find({})
+
+// Traer solo las 10 primeras peliculas de la colección
+// db.movies.find({}).limit(10)
+
+// Contar cuantas peliculas hay en la colección
+// db.movies.find({}).count()
+
+// Traer las últimas 10 peliculas ordenadas por el title
+// db.movies.find({}).sort({title: -1}).limit(10) // 1: ascendente, -1: descendente
+
+// Traer las últimas 10 peliculas ordenadas por el title, y solo devolver el title
+// db.movies.find({}, {title: 1, _id: 0}).sort({title: -1}).limit(10)
+
+// Contar cuantas peliculas con el rating "PG" hay en la colección
+db.movies.find({rated: "PG"}).count()
