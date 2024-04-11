@@ -1,0 +1,19 @@
+/* Actualizar Documentos en MongoDB */
+
+use('sample_mflix')
+
+/* -- Actualizar un solo documento -- */
+// updateOne() se utiliza para actualizar un solo documento en una colección.
+
+// Actualizar la pelicula con el title "The DevF Show" y cambiar el director a "Alejandra Herrera"
+// db.movies.updateOne({ title: 'The DevF Show' }, { $set: { director: 'Alejandra Herrera' } }) // $set es un operador de actualización que modifica SOLAMENTE un campo específico en un documento. Si el campo no existe, $set lo creará. Si no se especifica $set, el documento se reemplazará por completo.
+
+// db.movies.find({ title: 'The DevF Show' })
+
+/* -- Actualizar multiples documentos -- */
+// updateMany() se utiliza para actualizar multiples documentos en una colección.
+
+// Actualizar todas las peliculas que contengan el titulo "The DevF Show" y cambiar el runtime a 120
+// db.movies.updateMany({ title: /DevF/ }, { $set: { runtime: 120 } })
+
+db.movies.find({ title: /DevF/ })
