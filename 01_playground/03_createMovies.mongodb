@@ -5,70 +5,70 @@ use('sample_mflix')
 /* -- Insertar un solo documento -- */
 // insertOne() se utiliza para insertar un solo documento en una colección.
 
-// db.movies.insertOne({
-//     title: 'The DevF Show',
-//     year: 2024,
-//     rated: 'R',
-//     runtime: 180,
-//     countries: ['Mexico'],
-//     genres: ['Life', 'Drama'],
-//     director: 'Guillermo del Toro',
-//     writers: ['César Guerra', 'Francis Ford Coppola'],
-//     actors: [
-//         'Tom Cruise',
-//         'Al Pacino',
-//         'Morgan Freeman',
-//         'Angelina Jolie',
-//         'Alain Aguilar',
-//         'Alejandra Herrera'
-//     ],
-//     plot: 'In a world where technology reigns supreme, a group of diverse individuals from different walks of life find themselves at a crossroads. Faced with the harsh realities of the job market and the ever-increasing demand for tech skills, they decide to enroll in an online programming school, "DevF", with the hope of changing their career paths. As they navigate through the ups and downs of the program, they quickly realize that the journey to becoming a software developer is not as easy as they thought. Will they be able to overcome the challenges and achieve their dreams?',
-//     poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg',
-//     comments: []
-// })
+db.movies.insertOne({
+    title: 'The DevF Show',
+    year: 2024,
+    rated: 'R',
+    runtime: 180,
+    countries: ['Mexico'],
+    genres: ['Life', 'Drama'],
+    director: 'Guillermo del Toro',
+    writers: ['César Guerra', 'Francis Ford Coppola'],
+    actors: [
+        'Tom Cruise',
+        'Al Pacino',
+        'Morgan Freeman',
+        'Angelina Jolie',
+        'Alain Aguilar',
+        'Alejandra Herrera'
+    ],
+    plot: 'In a world where technology reigns supreme, a group of diverse individuals from different walks of life find themselves at a crossroads. Faced with the harsh realities of the job market and the ever-increasing demand for tech skills, they decide to enroll in an online programming school, "DevF", with the hope of changing their career paths. As they navigate through the ups and downs of the program, they quickly realize that the journey to becoming a software developer is not as easy as they thought. Will they be able to overcome the challenges and achieve their dreams?',
+    poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg',
+    comments: []
+})
 
-// db.movies.find({title: 'The DevF Show'})
+db.movies.find({title: 'The DevF Show'})
 
 
 /* -- Insertar multiples documentos -- */
 // insertMany() se utiliza para insertar multiples documentos en una colección.
 
-// db.movies.insertMany([
-//     {
-//         title: 'The DevF Show II: The Hope of the Future',
-//         year: 2025,
-//         rated: 'R',
-//         runtime: 180,
-//         countries: ['Mexico'],
-//         genres: ['Life', 'Drama'],
-//         director: 'Gullermo del Toro',
-//         writers: ['César Guerra', 'Steven Spielberg'],
-//         poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg',
+db.movies.insertMany([
+    {
+        title: 'The DevF Show II: The Hope of the Future',
+        year: 2025,
+        rated: 'R',
+        runtime: 180,
+        countries: ['Mexico'],
+        genres: ['Life', 'Drama'],
+        director: 'Gullermo del Toro',
+        writers: ['César Guerra', 'Steven Spielberg'],
+        poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg',
 
-//     },
-//     {
-//         title: 'The DevF Show III: No Turning Back',
-//         year: 2026,
-//         rated: 'R',
-//         runtime: 180,
-//         countries: ['Mexico'],
-//         genres: ['Life', 'Drama'],
-//         director: 'Gullermo del Toro',
-//         writers: ['César Guerra', 'George Martin'],
-//         poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg'
-//     },
-//     {
-//         title: 'The DevF Show IV: To the Stars and Beyond',
-//         year: 2027,
-//         rated: 'R',
-//         runtime: 180,
-//         countries: ['Mexico'],
-//         genres: ['Life', 'Drama'],
-//         director: 'Gullermo del Toro',
-//         writers: ['César Guerra', 'George Lucas'],
-//         poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg'
-//     }
-// ])
+    },
+    {
+        title: 'The DevF Show III: No Turning Back',
+        year: 2026,
+        rated: 'R',
+        runtime: 180,
+        countries: ['Mexico'],
+        genres: ['Life', 'Drama'],
+        director: 'Gullermo del Toro',
+        writers: ['César Guerra', 'George Martin'],
+        poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg'
+    },
+    {
+        title: 'The DevF Show IV: To the Stars and Beyond',
+        year: 2027,
+        rated: 'R',
+        runtime: 180,
+        countries: ['Mexico'],
+        genres: ['Life', 'Drama'],
+        director: 'Gullermo del Toro',
+        writers: ['César Guerra', 'George Lucas'],
+        poster: 'https://m.media-amazon.com/images/I/51WvZ0p6PcL.jpg'
+    }
+])
 
 // encontrar todas las peliculas que tengan DevF en el titulo
 db.movies.find({title: /DevF/})
