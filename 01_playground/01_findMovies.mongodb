@@ -35,4 +35,13 @@ use('sample_mflix')
 // db.movies.find({}, {title: 1, _id: 0}).sort({title: -1}).limit(10)
 
 // Contar cuantas peliculas con el rating "PG" hay en la colección
-db.movies.find({rated: "PG"}).count()
+// db.movies.find({rated: "PG"}).count()
+
+/* -- Operadores de Comparación -- */
+// Un operador de comparación en MongoDB es una expresión que compara campos de un documento con valores especificados.
+
+// Contar cuantas peliculas hay con rating "PG" y "PG-13"
+db.movies.find({rated: {$in: ["PG", "PG-13"]}}).count() // $in: busca valores que coincidan con los especificados en un array
+
+// Traer las peliculas con imdb.rating mayor a 9
+db.movies.find({"imdb.rating": {$gt: 9}}) // $gt: busca valores mayores que el especificado
