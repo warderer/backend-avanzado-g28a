@@ -6,14 +6,22 @@ use('sample_mflix')
 // updateOne() se utiliza para actualizar un solo documento en una colección.
 
 // Actualizar la pelicula con el title "The DevF Show" y cambiar el director a "Alejandra Herrera"
-// db.movies.updateOne({ title: 'The DevF Show' }, { $set: { director: 'Alejandra Herrera' } }) // $set es un operador de actualización que modifica SOLAMENTE un campo específico en un documento. Si el campo no existe, $set lo creará. Si no se especifica $set, el documento se reemplazará por completo.
+db.movies.updateOne({ title: 'The DevF Show' }, { $set: { director: 'Alejandra Herrera' } }) // $set es un operador de actualización que modifica SOLAMENTE un campo específico en un documento. Si el campo no existe, $set lo creará. Si no se especifica $set, el documento se reemplazará por completo.
 
-// db.movies.find({ title: 'The DevF Show' })
+db.movies.find({ title: 'The DevF Show' })
 
 /* -- Actualizar multiples documentos -- */
 // updateMany() se utiliza para actualizar multiples documentos en una colección.
 
 // Actualizar todas las peliculas que contengan el titulo "The DevF Show" y cambiar el runtime a 120
-// db.movies.updateMany({ title: /DevF/ }, { $set: { runtime: 120 } })
+db.movies.updateMany({ title: /DevF/ }, { $set: { runtime: 120 } })
+
+db.movies.find({ title: /DevF/ })
+
+/* -- Push --*/
+// $push es un operador de actualización que agrega un valor a un arreglo en un documento. Si el campo no existe, $push lo creará.
+
+// Agregar un actor de pelicula 'César Guerra' al arreglo de actores de todas las peliculas que tengan DevF en el titulo
+db.movies.updateMany({ title: /DevF/ }, { $push: { actors: 'César Guerra' } })
 
 db.movies.find({ title: /DevF/ })
