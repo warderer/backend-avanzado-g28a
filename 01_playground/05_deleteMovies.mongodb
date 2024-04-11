@@ -1,0 +1,24 @@
+/* -- Eliminar Documentos en MongoDB */
+
+use('sample_mflix')
+
+/* -- Eliminar un solo documento -- */
+// deleteOne() se utiliza para eliminar un solo documento en una colección.
+
+// Eliminar la pelicula con el titulo "The DevF Show"
+db.movies.deleteOne({title: 'The DevF Show'})
+
+db.movies.find({title: 'The DevF Show'})
+
+// Eliminar una pelicula por ID
+db.movies.deleteOne({ _id: ObjectId('66173cb68d2f7e3db1ad9231') })
+
+db.movies.find({ title: /DevF/ })
+
+/* -- Eliminar Múltiples Documentos -- */
+// deleteMany() se utiliza para eliminar múltiples documentos en una colección.
+
+// Eliminar todas las peliculas que contengan el titulo "DevF"
+db.movies.deleteMany({ title: /DevF/ })
+
+db.movies.find({ title: /DevF/ })
