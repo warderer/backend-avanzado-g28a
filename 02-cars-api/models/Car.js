@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 // 2. Crear el Schema
 const carSchema = new mongoose.Schema({
   // campo: tipo de dato || campo: { type: tipo de dato, options }
-  plate: { type: String, required: true }, // Placa del auto
+  plate: { type: String, required: true, unique: true }, // Placa del auto
   year: { type: Number, required: true }, // Año del auto
   model: { type: String, required: true }, // Modelo del auto
   brand: { type: String, required: true }, // Marca del auto
@@ -19,7 +19,7 @@ const carSchema = new mongoose.Schema({
     required: true,
     enum: ['sedan', 'hatchback', 'suv', 'coupe', 'convertible', 'pickup', 'van', 'minivan', 'sport', 'luxury', 'hybrid', 'electric', 'wagon', 'compact']
   },
-  vin: String, // Número de serie del vehiculo
+  vin: { type: String, required: true, unique: true }, // Número de serie del vehiculo
   newCar: { type: Boolean, default: true }, // Es un auto nuevo?
   isActive: { type: Boolean, default: true } // Está activo?
 }, { timestamps: true }) // Timestamps: true agrega createdAt y updatedAt (opcional)
