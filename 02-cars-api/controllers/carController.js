@@ -19,7 +19,7 @@ const createCar = async (req, res) => {
 // - Get all cars
 const getAllCars = async (req, res) => {
   try {
-    const cars = await Car.find()
+    const cars = await Car.find({ isActive: true })
     res.status(200).json(cars)
   } catch (error) {
     res.status(400).json({ msg: 'Error Getting Cars', error })
@@ -29,7 +29,7 @@ const getAllCars = async (req, res) => {
 // - Get car by id
 const getCarById = async (req, res) => {
   try {
-    const car = await Car.findById(req.params.carId)
+    const car = await Car.find({ _id: req.params.carId, isActive: true })
     res.status(200).json(car)
   } catch (error) {
     res.status(400).json({ msg: 'Error Getting Car', error })
@@ -52,10 +52,35 @@ const updateCarById = async (req, res) => {
 }
 
 // Delete
+const deleteCarById = async (req, res) => {
+  if (!req.params.carId) return res.status(400).json({ msg: 'Missing carId' })
+
+  // Si el query string destroy es true, eliminamos el carro fisicamente de la base de datos.
+  if (req.query.destroy === 'true') {
+    try {
+      const deletedCar = await Car.findByIdAndDelete(req.params.carId)
+      if (deletedCar === null) return res.status(404).json({ msg: 'Delete: Car not found' })
+      return res.status(204).json() // No content
+    } catch (error) {
+      return res.status(400).json({ msg: 'Error Deleting Car', error })
+    }
+  }
+
+  // Si el query string destroy es false o no se envía, actualizamos el campo isActive a false.
+  try {
+    const updateCar = await Car
+      .findByIdAndUpdate(req.params.carId, { isActive: false }, { new: true })
+    if (updateCar === null) return res.status(404).json({ msg: 'Delete: Car not found' })
+    return res.status(204).json() // No content
+  } catch (error) {
+    return res.status(400).json({ msg: 'Error Deleting Car', error })
+  }
+}
 
 export {
   createCar,
   getAllCars,
   getCarById,
-  updateCarById
+  updateCarById,
+  deleteCarById
 }
