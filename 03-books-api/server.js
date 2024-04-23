@@ -1,6 +1,9 @@
+import { connect } from './config/database.js'
 import express from 'express'
 
 const PORT = process.env.PORT || 3000
+
+connect() // Nos conectamos a la base de datos
 
 const api = express()
 api.use(express.json())
