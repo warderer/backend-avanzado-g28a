@@ -48,8 +48,38 @@ const createBook = async (req, res) => {
 
 // READ
 const getAllBooks = async (req, res) => {
+  // Objeto de la consulta que se hará a la base de datos
+  const queryDb = { isActive: true }
+
+  // Se va a poder filtrar por: title, genre
+  const queryKeys = ['title', 'genre', 'publisher']
+
+  // Recorrer el query string para agregar los filtros a la consulta
+  // ?title=Harry&genre=Fiction
+  queryKeys.forEach(key => {
+    if (req.query[key]) {
+      queryDb[key] = { $regex: new RegExp(req.query[key], 'i') }
+    }
+  })
+
+  /*
+  Esta línea de código en JavaScript está creando una consulta para una base de datos MongoDB.
+
+  `queryDb[key] = { $regex: new RegExp(req.query[key], 'i') }`
+
+  Aquí está lo que está sucediendo:
+
+  1. `queryDb[key]`: Establece una propiedad en el objeto `queryDb` con el nombre de la clave obtenida de `key`.
+
+  2. `{ $regex: new RegExp(req.query[key], 'i') }`: Esto crea un objeto que MongoDB puede usar para realizar una búsqueda con expresiones regulares. `$regex` es un operador de consulta de MongoDB que permite buscar utilizando expresiones regulares.
+
+  3. `new RegExp(req.query[key], 'i')`: Crea una nueva expresión regular a partir del valor obtenido de `req.query[key]`. El segundo argumento `'i'` es una bandera que hace que la búsqueda sea insensible a mayúsculas y minúsculas.
+
+  En resumen, esta línea de código está preparando una consulta de MongoDB que buscará en la base de datos cualquier valor que coincida con la expresión regular proporcionada, sin tener en cuenta las mayúsculas y minúsculas.
+  */
+
   try {
-    const books = await Book.find({ isActive: true }).populate('authors')
+    const books = await Book.find(queryDb).populate('authors')
 
     if (!books) {
       return res.status(404).json({ msg: 'Books not found' })
