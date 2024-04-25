@@ -120,18 +120,18 @@ const deleteBookById = async (req, res) => {
     } catch (err) {
       res.status(400).json({ error: err.message })
     }
+  }
 
-    // Softdelete: Si el query string destroy no está presente o es false, cambio el campo isActive a false
-    try {
-      const book = await Book
-        .findByIdAndUpdate(req.params.bookId, { isActive: false }, { new: false })
-      if (!book || book.isActive === false) {
-        return res.status(404).json({ msg: 'Book not found' })
-      }
-      res.status(204).json()
-    } catch (err) {
-      res.status(400).json({ error: err.message })
+  // Softdelete: Si el query string destroy no está presente o es false, cambio el campo isActive a false
+  try {
+    const book = await Book
+      .findByIdAndUpdate(req.params.bookId, { isActive: false }, { new: false })
+    if (!book || book.isActive === false) {
+      return res.status(404).json({ msg: 'Book not found' })
     }
+    res.status(204).json()
+  } catch (err) {
+    res.status(400).json({ error: err.message })
   }
 }
 
