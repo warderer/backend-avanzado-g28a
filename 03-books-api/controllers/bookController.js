@@ -47,9 +47,22 @@ const createBook = async (req, res) => {
 }
 
 // READ
+const getAllBooks = async (req, res) => {
+  try {
+    const books = await Book.find({ isActive: true }).populate('authors')
+
+    if (!books) {
+      return res.status(404).json({ msg: 'Books not found' })
+    }
+
+    res.status(200).json(books)
+  } catch (err) {
+    res.status(400).json({ error: err.message })
+  }
+}
 
 // UPDATE
 
 // DELETE
 
-export { createBook }
+export { createBook, getAllBooks }
