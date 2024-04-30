@@ -2,6 +2,7 @@ import { connect } from './config/database.js'
 import express from 'express'
 import morgan from 'morgan'
 import bookRoutes from './routes/bookRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -16,6 +17,7 @@ api.use(morgan(':host :method :url :status :param[id] :res[content-length] - :re
 
 // Aqui van las rutas
 api.use('/api/v1/books', bookRoutes)
+api.use('/api/v1', authRoutes)
 
 api.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT} 🚀`)
