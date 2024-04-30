@@ -15,7 +15,7 @@ const register = async (req, res) => {
     // Reemplazamos la contraseña en texto plano por la contraseña hasheada
     req.body.password = hashedPassword
 
-    // Creamos el usuario en la base de datos para
+    // Creamos el usuario en la base de datos
     const newUser = await User.create(req.body)
 
     // Eliminar la contraseña del objeto de respuesta por seguridad. Mongoose ignora todas las propiedades que tienen el valor undefined.
